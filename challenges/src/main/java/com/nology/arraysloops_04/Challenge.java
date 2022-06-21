@@ -21,7 +21,10 @@ public class Challenge {
      * @return a new array containing the first and last items in the given array e.g. ["Ollie", "Bex"]
      */
     public String[] getFirstAndLast(String[] namesArr) {
-        return new String[0];
+        if (namesArr.length == 0) {
+            return new String[0];
+        }
+        return new String[]{namesArr[0], namesArr[namesArr.length - 1]};
     }
 
     /***
@@ -31,7 +34,11 @@ public class Challenge {
      * @return an amount e.g. 104
      */
     public int totalAges(int[] agesArr) {
-        return -1;
+        int sum = 0;
+        for (int age : agesArr) {
+            sum += age;
+        }
+        return sum;
     }
 
     /***
@@ -41,7 +48,13 @@ public class Challenge {
      * @return Amount of odd numbers e.g. 3
      */
     public int getAmountOfOddNumbers(int[] numbersArr) {
-        return -1;
+        int count = 0;
+        for (int number : numbersArr) {
+            if (number % 2 != 0) {
+                count++;
+            }
+        }
+        return count;
     }
 
     // -------------- INTERMEDIATE --------------
@@ -57,7 +70,15 @@ public class Challenge {
      * @return a new array of all numbers between and including the min and max number. e.g. [3, 4, 5, 6]
      */
     public int[] getRange(int min, int max) {
-        return new int[] {};
+        if (min > max) {
+            return new int[] {};
+        }
+        int range = (max - min) + 1;
+        int[] returnArray = new int[range];
+        for (int i = 0; i < range; i++) {
+            returnArray[i] = min + i;
+        }
+        return returnArray;
     }
 
     /**
@@ -66,7 +87,11 @@ public class Challenge {
      * @return a string with the last name, followed by the first name e.g. "Evans Andy"
      */
     public String swapNames(String fullName) {
-        return "";
+        String[] splitNames = fullName.split(" ");
+        String firstName = splitNames[0];
+        splitNames[0] = splitNames[splitNames.length - 1];
+        splitNames[splitNames.length - 1] = firstName;
+        return String.join(" ", splitNames);
     }
 
     /***
@@ -80,7 +105,14 @@ public class Challenge {
      * @return true or false depending on whether the newScore is the highest value in the array
      */
     public boolean isHighestScore(int[] scoresArr, int newScore) {
-        return false;
+        boolean result = true;
+        for (int score : scoresArr) {
+            if (score > newScore) {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 
     // -------------- ADVANCED --------------
@@ -103,7 +135,16 @@ public class Challenge {
      * @return The sorted array of numbers e.g. [1, 2, 4, 5, 8]
      */
     public int[] sort(int[] numbersArr) {
-        return new int[] {};
+        for (int i = 0; i < numbersArr.length - 1; i++) {
+            for (int j = 0; j < numbersArr.length - 1; j++) {
+                if (numbersArr[j] > numbersArr[j + 1]) {
+                    int swappingNumber = numbersArr[j];
+                    numbersArr[j] = numbersArr[j + 1];
+                    numbersArr[j + 1] = swappingNumber;
+                }
+            }
+        }
+        return numbersArr;
     }
 
 }
